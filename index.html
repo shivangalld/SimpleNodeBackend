@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+   <head>
+      <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+   </head>
+   
+   <body ng-app = "myapp">
+      <div ng-controller = "HelloController" >
+         <h2>Welcome {{helloTo.title}} to the world of Tutorialspoint!</h2>
+      </div>
+      
+      <script>
+         angular.module("myapp", [])
+         
+         .controller("HelloController", function($scope, $http) {
+            $scope.helloTo = {};
+            $scope.helloTo.title = "AngularJS";
+            $http.get('/users').then(function(response){
+               console.log(response.data[0]);
+               $scope.helloTo.title = response.data[0] + 'Boi';
+            });
+         });
+      </script>
+      
+   </body>
+</html>
